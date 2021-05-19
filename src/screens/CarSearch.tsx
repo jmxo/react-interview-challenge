@@ -11,7 +11,7 @@ const Container = styled.div`
   }
 `;
 
-export default function Search() {
+export default function CarSearch() {
   return (
     <Container>
       <SearchControls />

@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { Car } from "../types/Car";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,19 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-interface Car {
-  stockNumber: number;
-  manufacturerName: string;
-  modelName: string;
-  color: string;
-  mileage: {
-    number: number;
-    unit: string;
-  };
-  fuelType: string;
-  pictureUrl: string;
-}
 
 interface CarListItemProps {
   car: Car;

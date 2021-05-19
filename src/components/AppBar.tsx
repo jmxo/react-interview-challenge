@@ -47,20 +47,18 @@ export default function AppBar() {
             className={classes.links}
             color="textPrimary"
             variant="subtitle1"
+            component="nav"
           >
-            <Link to="#" component={RouterLink}>
+            <Link to="#" component={RouterLink} color="inherit">
               Purchase
             </Link>
-            <Link to="#" component={RouterLink}>
+            <Link to="#" component={RouterLink} color="inherit">
               My Orders
             </Link>
-            <Link to="#" component={RouterLink}>
+            <Link to="#" component={RouterLink} color="inherit">
               Sell
             </Link>
           </Typography>
-          {/* <Button color="inherit">Purchase</Button>
-          <Button color="inherit">My Orders</Button>
-          <Button color="inherit">Sell</Button> */}
         </Toolbar>
       </MuiAppBar>
     </div>
