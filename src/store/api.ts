@@ -1,9 +1,11 @@
-export async function fetchCars() {
+export async function fetchCars(params: any) {
+  const { manufacturer = "", color = "", sort = "desc", page = 1 } = params;
   const response = await fetch(
-    "https://auto1-mock-server.herokuapp.com/api/cars?sort=asc&page=1"
+    `https://auto1-mock-server.herokuapp.com/api/cars?manufacturer=${manufacturer}&color=${color}&sort=${sort}&page=${page}`
   );
 
   const data = await response.json();
+  console.log("BINGO: ", data);
   return data;
 }
 

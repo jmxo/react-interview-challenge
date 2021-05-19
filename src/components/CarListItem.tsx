@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Car } from "../types/Car";
+import { Car } from "../types/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     subtitle: {
       marginBottom: theme.spacing(1),
+    },
+    capitalize: {
+      textTransform: "capitalize",
     },
   })
 );
@@ -49,7 +52,7 @@ export default function CarListItem(props: CarListItemProps) {
         <Typography variant="h2" component="h3">
           {`${car.manufacturerName} ${car.modelName}`}
         </Typography>
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" className={classes.capitalize}>
           {`Stock #${car.stockNumber} - ${car.mileage.number} ${car.mileage.unit} - ${car.fuelType} - ${car.color}`}
         </Typography>
         <Typography variant="body1">

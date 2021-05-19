@@ -6,7 +6,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import React from "react";
+import React, { useState } from "react";
+import {
+  fetchCars,
+  selectColors,
+  selectManufacturers,
+} from "../store/carsSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { SearchFilters } from "../types/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,10 +31,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     selectEmpty: {
       marginTop: theme.spacing(1),
+      textTransform: "capitalize",
     },
     cardActions: {
       justifyContent: "flex-end",
       padding: 0,
+    },
+    menuItem: {
+      textTransform: "capitalize",
     },
   })
 );
@@ -35,44 +46,98 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SearchControls() {
   const classes = useStyles();
 
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
+
+  const dispatch = useAppDispatch();
+  const colors = useAppSelector(selectColors);
+  const manufacturers = useAppSelector(selectManufacturers);
+
+  const handleChange = (
+    event: React.ChangeEvent<{
+      name?: string | undefined;
+      value: unknown;
+    }>
+  ) => {
+    const { name, value } = event.target;
+    if (name === "color") {
+      setSelectedColor(value as string);
+    }
+    if (name === "manufacturer") {
+      setSelectedManufacturer(value as string);
+    }
+  };
+
+  const handleSubmit = () => {
+    const filters = {
+      color: selectedColor,
+      manufacturer: selectedManufacturer,
+      sort: "desc",
+      page: 1,
+    } as SearchFilters;
+
+    dispatch(fetchCars(filters));
+  };
+
   return (
     <div className={classes.root}>
       <Card className={classes.cardRoot} variant="outlined" square>
         <InputLabel id="colors">Color</InputLabel>
         <FormControl className={classes.formControl} variant="outlined">
           <Select
+            name="color"
             labelId="colors"
-            defaultValue={10}
-            // id="demo-simple-select-placeholder-label"
-            // value={age}
-            // onChange={handleChange}
+            value={selectedColor}
+            onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
           >
-            <MenuItem value={10} selected>
-              All car colors
-            </MenuItem>
+            <MenuItem value="">All car colors</MenuItem>
+            {colors.length > 0 &&
+              colors.map((color) => (
+                <MenuItem
+                  key={color}
+                  value={color}
+                  className={classes.menuItem}
+                >
+                  {color}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         <br />
         <InputLabel id="manufacturer">Manufacturer</InputLabel>
         <FormControl className={classes.formControl} variant="outlined">
           <Select
+            name="manufacturer"
             labelId="manufacturer"
-            // id="demo-simple-select-placeholder-label"
-            // value={age}
-            defaultValue={10}
-            // onChange={handleChange}
+            value={selectedManufacturer}
+            onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
           >
-            <MenuItem value={10} selected>
+            <MenuItem value={""} className={classes.menuItem}>
               All manufacturers
             </MenuItem>
+            {manufacturers.length > 0 &&
+              manufacturers.map((manu, id) => (
+                <MenuItem
+                  key={manu.name}
+                  value={manu.name}
+                  className={classes.menuItem}
+                >
+                  {manu.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         <CardActions className={classes.cardActions}>
-          <Button variant="contained" color="primary" disableElevation>
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            onClick={handleSubmit}
+          >
             Filter
           </Button>
         </CardActions>

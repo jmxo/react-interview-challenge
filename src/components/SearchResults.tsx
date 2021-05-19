@@ -1,10 +1,16 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
-import { selectStatus } from "../store/carsSlice";
-import { useAppSelector } from "../store/hooks";
-import { Car } from "../types/Car";
+import React, { useEffect } from "react";
+import {
+  fetchCars,
+  selectCars,
+  selectError,
+  selectStatus,
+  selectTotalCarsCount,
+  selectTotalPageCount,
+} from "../store/carsSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import CarListItem from "./CarListItem";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,164 +36,54 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface SearchResultsProps {
-  cars: Car[];
-}
-
-export default function SearchResults(props: SearchResultsProps) {
+export default function SearchResults() {
   const classes = useStyles();
-  const status = useAppSelector(selectStatus);
-  const { cars } = props;
-  return (
-    <div className={classes.root}>
-      {status === "loading" && (
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CircularProgress />
-        </div>
-      )}
-      {status === "succeeded" && (
-        <div>
-          <Typography variant="h2" component="h1">
-            Available Cars
-          </Typography>
-          <Typography variant="subtitle1" className={classes.subtitle}>
-            Showing 10 of 100 results
-          </Typography>
-          {cars.length > 0 &&
-            cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
-        </div>
-      )}
-    </div>
-  );
-}
 
-// mock data
-// const cars = [
-//   {
-//     stockNumber: 72838,
-//     manufacturerName: "Mercedes-Benz",
-//     modelName: "CLK-Klasse",
-//     color: "green",
-//     mileage: {
-//       number: 100332,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 32207,
-//     manufacturerName: "Volkswagen",
-//     modelName: "Tiguan",
-//     color: "green",
-//     mileage: {
-//       number: 100502,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 23284,
-//     manufacturerName: "Mercedes-Benz",
-//     modelName: "E-Klasse",
-//     color: "yellow",
-//     mileage: {
-//       number: 100578,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 87657,
-//     manufacturerName: "Dodge",
-//     modelName: "Nitro",
-//     color: "red",
-//     mileage: {
-//       number: 100609,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 83879,
-//     manufacturerName: "Tesla",
-//     modelName: "Model X",
-//     color: "black",
-//     mileage: {
-//       number: 100900,
-//       unit: "km",
-//     },
-//     fuelType: "Petrol",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 18916,
-//     manufacturerName: "Tesla",
-//     modelName: "Model S",
-//     color: "blue",
-//     mileage: {
-//       number: 101034,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 51615,
-//     manufacturerName: "Chrysler",
-//     modelName: "Crossfire",
-//     color: "silver",
-//     mileage: {
-//       number: 101201,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 24037,
-//     manufacturerName: "Audi",
-//     modelName: "80/90",
-//     color: "blue",
-//     mileage: {
-//       number: 101273,
-//       unit: "km",
-//     },
-//     fuelType: "Petrol",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 91866,
-//     manufacturerName: "Mercedes-Benz",
-//     modelName: "123",
-//     color: "green",
-//     mileage: {
-//       number: 101583,
-//       unit: "km",
-//     },
-//     fuelType: "Petrol",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-//   {
-//     stockNumber: 92321,
-//     manufacturerName: "Mercedes-Benz",
-//     modelName: "CLK-Klasse",
-//     color: "white",
-//     mileage: {
-//       number: 101608,
-//       unit: "km",
-//     },
-//     fuelType: "Diesel",
-//     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-//   },
-// ];
+  const cars = useAppSelector(selectCars);
+  const totalPageCount = useAppSelector(selectTotalPageCount);
+  const totalCarsCount = useAppSelector(selectTotalCarsCount);
+  const status = useAppSelector(selectStatus);
+  const error = useAppSelector(selectError);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchCars());
+    }
+  }, [status, dispatch]);
+
+  let content;
+
+  if (status === "loading") {
+    content = (
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  } else if (status === "failed") {
+    content = <div>{String(error)}</div>;
+  } else if (status === "succeeded") {
+    content = (
+      <div>
+        <Typography variant="h2" component="h1">
+          Available Cars
+        </Typography>
+        <Typography variant="subtitle1" className={classes.subtitle}>
+          {`Showing 10 of ${totalCarsCount} results`}
+        </Typography>
+        {cars.length > 0 &&
+          cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
+      </div>
+    );
+  }
+
+  return <div className={classes.root}>{content}</div>;
+}

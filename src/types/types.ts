@@ -10,3 +10,15 @@ export interface Car {
   fuelType: string;
   pictureUrl: string;
 }
+
+export interface Manufacturer {
+  name: string;
+  models: Array<{ name: string }>;
+}
+
+export interface SearchFilters {
+  manufacturer?: string;
+  color?: string;
+  sort?: "desc" | "asc";
+  page?: number;
+}
