@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -11,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundColor: "white",
       color: theme.palette.text.primary,
-      flexGrow: 1,
       height: "80px",
       justifyContent: "center",
     },
@@ -39,20 +39,22 @@ export default function AppBar() {
         variant="outlined"
       >
         <Toolbar>
-          <img src={logo} alt="Auto1 logo" className={classes.logo} />
+          <RouterLink to="/">
+            <img src={logo} alt="Auto1 logo" className={classes.logo} />
+          </RouterLink>
           <div style={{ flex: 1 }}></div>
           <Typography
             className={classes.links}
             color="textPrimary"
             variant="subtitle1"
           >
-            <Link href="#" color="inherit">
+            <Link to="#" component={RouterLink}>
               Purchase
             </Link>
-            <Link href="#" color="inherit">
+            <Link to="#" component={RouterLink}>
               My Orders
             </Link>
-            <Link href="#" color="inherit">
+            <Link to="#" component={RouterLink}>
               Sell
             </Link>
           </Typography>

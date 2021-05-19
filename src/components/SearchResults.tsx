@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MainArea() {
+export default function SearchResults() {
   const classes = useStyles();
   return (
     <div className={classes.root}>

@@ -1,29 +1,30 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
-import styled from "styled-components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppBar from "./components/AppBar";
-import FilteringControls from "./components/FilteringControls";
-import MainArea from "./components/MainArea";
+import Footer from "./components/Footer";
+import Screen from "./components/Screen";
+import CarDetails from "./screens/CarDetails";
+import CarSearch from "./screens/CarSearch";
+import NoMatch from "./screens/NoMatch";
 import { theme } from "./utils/theme";
-
-const Container = styled.div`
-  display: flex;
-  padding: 24px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-`;
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar />
-      <Container>
-        <FilteringControls />
-        <MainArea />
-      </Container>
+      <Router>
+        <AppBar />
+        <Screen>
+          <Switch>
+            <Route exact path="/" component={CarSearch} />
+            <Route exact path="/cars/:stockNumber" component={CarDetails} />
+            <Route path="*" component={NoMatch} />
+          </Switch>
+        </Screen>
+        <Footer />
+      </Router>
     </ThemeProvider>
   );
 }

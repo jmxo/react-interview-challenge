@@ -3,6 +3,7 @@ import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,7 +65,7 @@ export default function CarListItem(props: CarListItemProps) {
           {`Stock #${car.stockNumber} - ${car.mileage.number} ${car.mileage.unit} - ${car.fuelType} - ${car.color}`}
         </Typography>
         <Typography variant="body1">
-          <Link href="#" color="primary">
+          <Link to={`/cars/${car.stockNumber}`} component={RouterLink}>
             View details
           </Link>
         </Typography>

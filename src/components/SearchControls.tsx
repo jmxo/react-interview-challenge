@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function FilteringControls() {
+export default function SearchControls() {
   const classes = useStyles();
 
   return (

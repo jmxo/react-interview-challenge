@@ -1,0 +1,11 @@
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+/* to make sure that the child of root (Screen) can fill the remaining height after AppBar/Footer */
+#root {
+  display: flex;
+  flex-direction: column;
+}
