@@ -7,13 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useState } from "react";
-import {
-  fetchCars,
-  selectColors,
-  selectManufacturers,
-} from "../store/carsSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { SearchFilters } from "../types/types";
+import { Manufacturer, SearchFilters } from "../types/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,9 +43,11 @@ export default function SearchControls() {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
 
-  const dispatch = useAppDispatch();
-  const colors = useAppSelector(selectColors);
-  const manufacturers = useAppSelector(selectManufacturers);
+  // const dispatch = useAppDispatch();
+  // const colors = useAppSelector(selectColors);
+  const colors = [] as string[];
+  // const manufacturers = useAppSelector(selectManufacturers);
+  const manufacturers = [] as Manufacturer[];
 
   const handleChange = (
     event: React.ChangeEvent<{
@@ -72,11 +68,11 @@ export default function SearchControls() {
     const filters = {
       color: selectedColor,
       manufacturer: selectedManufacturer,
-      sort: "desc",
+      sort: "asc",
       page: 1,
     } as SearchFilters;
 
-    dispatch(fetchCars(filters));
+    // dispatch(fetchCars(filters));
   };
 
   return (

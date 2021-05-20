@@ -1,16 +1,9 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect } from "react";
-import {
-  fetchCars,
-  selectCars,
-  selectError,
-  selectStatus,
-  selectTotalCarsCount,
-  selectTotalPageCount,
-} from "../store/carsSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Car } from "../types/types";
 import CarListItem from "./CarListItem";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,57 +26,65 @@ const useStyles = makeStyles((theme: Theme) =>
     link: {
       padding: theme.spacing(1),
     },
+    pagination: {
+      padding: theme.spacing(1),
+      "& > *": {
+        marginRight: theme.spacing(4),
+      },
+      "& > *:last-child": {
+        marginRight: 0,
+      },
+    },
   })
 );
 
 export default function SearchResults() {
   const classes = useStyles();
-
-  const cars = useAppSelector(selectCars);
-  const totalPageCount = useAppSelector(selectTotalPageCount);
-  const totalCarsCount = useAppSelector(selectTotalCarsCount);
-  const status = useAppSelector(selectStatus);
-  const error = useAppSelector(selectError);
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchCars());
-    }
-  }, [status, dispatch]);
+  const status = "succeeded";
+  const cars = [] as Car[];
+  const totalCarsCount = 0;
+  const totalPageCount = 0;
 
   let content;
-
-  if (status === "loading") {
-    content = (
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </div>
-    );
-  } else if (status === "failed") {
-    content = <div>{String(error)}</div>;
-  } else if (status === "succeeded") {
-    content = (
-      <div>
-        <Typography variant="h2" component="h1">
-          Available Cars
+  // if (status === "loading") {
+  //   content = (
+  //     <div
+  //       style={{
+  //         flex: 1,
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //       }}
+  //     >
+  //       <CircularProgress />
+  //     </div>
+  //   );
+  // } else if (status === "failed") {
+  //   content = <div>{String(error)}</div>;
+  // } else if (status === "succeeded") {
+  content = (
+    <div>
+      <Typography variant="h2" component="h1">
+        Available Cars
+      </Typography>
+      <Typography variant="subtitle1" className={classes.subtitle}>
+        {`Showing ${cars.length} of ${totalCarsCount} results`}
+      </Typography>
+      {cars.length > 0 &&
+        cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Typography variant="body1" className={classes.pagination}>
+          <Link to="/" component={RouterLink}>
+            First
+          </Link>
+          <Link>Previous</Link>
+          <span>{`Page 1 of ${totalPageCount}`}</span>
+          <Link>Next</Link>
+          <Link>Last</Link>
         </Typography>
-        <Typography variant="subtitle1" className={classes.subtitle}>
-          {`Showing 10 of ${totalCarsCount} results`}
-        </Typography>
-        {cars.length > 0 &&
-          cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
       </div>
-    );
-  }
+    </div>
+  );
 
   return <div className={classes.root}>{content}</div>;
 }
