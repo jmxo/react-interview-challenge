@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Car } from "../types/types";
+import { Car } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

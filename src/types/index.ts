@@ -22,3 +22,9 @@ export interface SearchFilters {
   sort?: "desc" | "asc";
   page?: number;
 }
+
+export interface SearchResult {
+  cars: Car[];
+  totalPageCount: number;
+  totalCarsCount: number;
+}

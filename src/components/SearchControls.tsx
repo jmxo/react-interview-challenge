@@ -6,8 +6,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import React, { useState } from "react";
-import { Manufacturer, SearchFilters } from "../types/types";
+import React from "react";
+import useColors from "../hooks/useColors";
+import useManufacturers from "../hooks/useManufacturers";
+import { SearchFilters } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,17 +39,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchControls() {
+interface SearchControlsProps {
+  color: string;
+  manufacturer: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
+  setManufacturer: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function SearchControls(props: SearchControlsProps) {
   const classes = useStyles();
 
-  const [selectedColor, setSelectedColor] = useState<string>("");
-  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
+  const { color, manufacturer, setColor, setManufacturer } = props;
 
-  // const dispatch = useAppDispatch();
-  // const colors = useAppSelector(selectColors);
-  const colors = [] as string[];
-  // const manufacturers = useAppSelector(selectManufacturers);
-  const manufacturers = [] as Manufacturer[];
+  const { data: colors } = useColors();
+  const { data: manufacturers } = useManufacturers();
 
   const handleChange = (
     event: React.ChangeEvent<{
@@ -57,17 +62,17 @@ export default function SearchControls() {
   ) => {
     const { name, value } = event.target;
     if (name === "color") {
-      setSelectedColor(value as string);
+      setColor(value as string);
     }
     if (name === "manufacturer") {
-      setSelectedManufacturer(value as string);
+      setManufacturer(value as string);
     }
   };
 
   const handleSubmit = () => {
     const filters = {
-      color: selectedColor,
-      manufacturer: selectedManufacturer,
+      color: color,
+      manufacturer: manufacturer,
       sort: "asc",
       page: 1,
     } as SearchFilters;
@@ -83,13 +88,14 @@ export default function SearchControls() {
           <Select
             name="color"
             labelId="colors"
-            value={selectedColor}
+            value={color}
             onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
           >
             <MenuItem value="">All car colors</MenuItem>
-            {colors.length > 0 &&
+            {colors &&
+              colors.length > 0 &&
               colors.map((color) => (
                 <MenuItem
                   key={color}
@@ -107,7 +113,7 @@ export default function SearchControls() {
           <Select
             name="manufacturer"
             labelId="manufacturer"
-            value={selectedManufacturer}
+            value={manufacturer}
             onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
@@ -115,7 +121,8 @@ export default function SearchControls() {
             <MenuItem value={""} className={classes.menuItem}>
               All manufacturers
             </MenuItem>
-            {manufacturers.length > 0 &&
+            {manufacturers &&
+              manufacturers.length > 0 &&
               manufacturers.map((manu, id) => (
                 <MenuItem
                   key={manu.name}

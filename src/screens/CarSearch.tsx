@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SearchControls from "../components/SearchControls";
 import SearchResults from "../components/SearchResults";
+import useCars from "../hooks/useCars";
 
 const Container = styled.div`
   display: flex;
@@ -12,10 +13,20 @@ const Container = styled.div`
 `;
 
 export default function CarSearch() {
+  const [color, setColor] = useState<string>("");
+  const [manufacturer, setManufacturer] = useState<string>("");
+
+  const query = useCars({ color, manufacturer });
+
   return (
     <Container>
-      <SearchControls />
-      <SearchResults />
+      <SearchControls
+        color={color}
+        manufacturer={manufacturer}
+        setColor={setColor}
+        setManufacturer={setManufacturer}
+      />
+      <SearchResults query={query} />
     </Container>
   );
 }

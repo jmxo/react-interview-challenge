@@ -1,9 +1,11 @@
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { UseQueryResult } from "react-query";
 import { Link as RouterLink } from "react-router-dom";
-import { Car } from "../types/types";
+import { SearchResult } from "../types";
 import CarListItem from "./CarListItem";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,53 +40,58 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchResults() {
+interface SearchResultsProps {
+  query: UseQueryResult<SearchResult, Error>;
+}
+
+export default function SearchResults(props: SearchResultsProps) {
   const classes = useStyles();
-  const status = "succeeded";
-  const cars = [] as Car[];
-  const totalCarsCount = 0;
-  const totalPageCount = 0;
+
+  const { isLoading, error, data } = props.query;
+  const { cars, totalPageCount, totalCarsCount } = data || {};
 
   let content;
-  // if (status === "loading") {
-  //   content = (
-  //     <div
-  //       style={{
-  //         flex: 1,
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //       }}
-  //     >
-  //       <CircularProgress />
-  //     </div>
-  //   );
-  // } else if (status === "failed") {
-  //   content = <div>{String(error)}</div>;
-  // } else if (status === "succeeded") {
-  content = (
-    <div>
-      <Typography variant="h2" component="h1">
-        Available Cars
-      </Typography>
-      <Typography variant="subtitle1" className={classes.subtitle}>
-        {`Showing ${cars.length} of ${totalCarsCount} results`}
-      </Typography>
-      {cars.length > 0 &&
-        cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Typography variant="body1" className={classes.pagination}>
-          <Link to="/" component={RouterLink}>
-            First
-          </Link>
-          <Link>Previous</Link>
-          <span>{`Page 1 of ${totalPageCount}`}</span>
-          <Link>Next</Link>
-          <Link>Last</Link>
-        </Typography>
+
+  if (isLoading) {
+    content = (
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
       </div>
-    </div>
-  );
+    );
+  } else if (error) {
+    content = <div>{error.message}</div>;
+  } else {
+    content = cars && (
+      <div>
+        <Typography variant="h2" component="h1">
+          Available Cars
+        </Typography>
+        <Typography variant="subtitle1" className={classes.subtitle}>
+          {`Showing ${cars.length} of ${totalCarsCount} results`}
+        </Typography>
+        {cars.length > 0 &&
+          cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Typography variant="body1" className={classes.pagination}>
+            <Link to="/" component={RouterLink}>
+              First
+            </Link>
+            <Link>Previous</Link>
+            <span>{`Page 1 of ${totalPageCount}`}</span>
+            <Link>Next</Link>
+            <Link>Last</Link>
+          </Typography>
+        </div>
+      </div>
+    );
+  }
 
   return <div className={classes.root}>{content}</div>;
 }
