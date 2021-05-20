@@ -49,13 +49,28 @@ export default function AppBar() {
             variant="subtitle1"
             component="nav"
           >
-            <Link to="#" component={RouterLink} color="inherit">
+            <Link
+              to="#"
+              component={RouterLink}
+              color="inherit"
+              underline="none"
+            >
               Purchase
             </Link>
-            <Link to="#" component={RouterLink} color="inherit">
+            <Link
+              to="#"
+              component={RouterLink}
+              color="inherit"
+              underline="none"
+            >
               My Orders
             </Link>
-            <Link to="#" component={RouterLink} color="inherit">
+            <Link
+              to="#"
+              component={RouterLink}
+              color="inherit"
+              underline="none"
+            >
               Sell
             </Link>
           </Typography>

@@ -53,7 +53,9 @@ export default function CarListItem(props: CarListItemProps) {
           {`${car.manufacturerName} ${car.modelName}`}
         </Typography>
         <Typography variant="subtitle1" className={classes.capitalize}>
-          {`Stock #${car.stockNumber} - ${car.mileage.number} ${car.mileage.unit} - ${car.fuelType} - ${car.color}`}
+          {`Stock #${car.stockNumber} - ${
+            Number(car.mileage.number) / 1000
+          } ${car.mileage.unit.toUpperCase()} - ${car.fuelType} - ${car.color}`}
         </Typography>
         <Typography variant="body1">
           <Link to={`/cars/${car.stockNumber}`} component={RouterLink}>

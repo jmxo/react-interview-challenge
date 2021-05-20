@@ -7,9 +7,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
+import { QueryObserverResult, RefetchOptions } from "react-query";
 import useColors from "../hooks/useColors";
 import useManufacturers from "../hooks/useManufacturers";
-import { SearchFilters } from "../types";
+import { SearchResult } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,12 +45,15 @@ interface SearchControlsProps {
   manufacturer: string;
   setColor: React.Dispatch<React.SetStateAction<string>>;
   setManufacturer: React.Dispatch<React.SetStateAction<string>>;
+  refetch: (
+    options?: RefetchOptions | undefined
+  ) => Promise<QueryObserverResult<SearchResult, Error>>;
 }
 
 export default function SearchControls(props: SearchControlsProps) {
   const classes = useStyles();
 
-  const { color, manufacturer, setColor, setManufacturer } = props;
+  const { color, manufacturer, setColor, setManufacturer, refetch } = props;
 
   const { data: colors } = useColors();
   const { data: manufacturers } = useManufacturers();
@@ -70,14 +74,7 @@ export default function SearchControls(props: SearchControlsProps) {
   };
 
   const handleSubmit = () => {
-    const filters = {
-      color: color,
-      manufacturer: manufacturer,
-      sort: "asc",
-      page: 1,
-    } as SearchFilters;
-
-    // dispatch(fetchCars(filters));
+    refetch();
   };
 
   return (

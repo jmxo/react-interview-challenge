@@ -1,12 +1,11 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { UseQueryResult } from "react-query";
-import { Link as RouterLink } from "react-router-dom";
 import { SearchResult } from "../types";
 import CarListItem from "./CarListItem";
+import Pagination from "./Pagination";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,30 +24,28 @@ const useStyles = makeStyles((theme: Theme) =>
     subtitle: {
       marginBottom: theme.spacing(1),
     },
-    link: {
-      padding: theme.spacing(1),
-    },
-    pagination: {
-      padding: theme.spacing(1),
-      "& > *": {
-        marginRight: theme.spacing(4),
-      },
-      "& > *:last-child": {
-        marginRight: 0,
-      },
+    list: {
+      marginBottom: theme.spacing(3),
     },
   })
 );
 
 interface SearchResultsProps {
   query: UseQueryResult<SearchResult, Error>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function SearchResults(props: SearchResultsProps) {
   const classes = useStyles();
 
-  const { isLoading, error, data } = props.query;
+  const { query, page, setPage } = props;
+  const { isLoading, error, data, refetch } = query;
   const { cars, totalPageCount, totalCarsCount } = data || {};
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   let content;
 
@@ -76,18 +73,24 @@ export default function SearchResults(props: SearchResultsProps) {
         <Typography variant="subtitle1" className={classes.subtitle}>
           {`Showing ${cars.length} of ${totalCarsCount} results`}
         </Typography>
-        {cars.length > 0 &&
-          cars.map((car) => <CarListItem key={car.stockNumber} car={car} />)}
+        <div className={classes.list}>
+          {cars.length > 0 &&
+            cars.map((car) => (
+              <CarListItem
+                key={`${car.manufacturerName}-${car.stockNumber}`} // I did this because some stock numbers were shared
+                car={car}
+              />
+            ))}
+        </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Typography variant="body1" className={classes.pagination}>
-            <Link to="/" component={RouterLink}>
-              First
-            </Link>
-            <Link>Previous</Link>
-            <span>{`Page 1 of ${totalPageCount}`}</span>
-            <Link>Next</Link>
-            <Link>Last</Link>
-          </Typography>
+          <Pagination
+            count={totalPageCount}
+            page={page}
+            onChange={handleChange}
+            size="large"
+            showFirstButton
+            showLastButton
+          />
         </div>
       </div>
     );
