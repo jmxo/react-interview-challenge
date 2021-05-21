@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     main: {
       flex: 1,
       padding: theme.spacing(1),
+      marginBottom: theme.spacing(3),
     },
     aside: {
       width: 300,
@@ -48,6 +49,7 @@ const ContentWrapper = styled.div`
   width: 800px;
   margin: 0 auto;
   display: flex;
+  align-items: flex-start;
   padding: 8px;
 
   @media (max-width: 960px) {

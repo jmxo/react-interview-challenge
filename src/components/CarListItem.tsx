@@ -11,23 +11,21 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cardRoot: {
       minWidth: 275,
+      height: 90,
       padding: theme.spacing(1.5),
       marginBottom: theme.spacing(1),
       display: "flex",
     },
     cardMedia: {
-      width: 120,
-      height: 80,
+      width: 90,
+      height: 66,
       marginRight: theme.spacing(3),
     },
-    cardContent: {
-      // padding: theme.spacing(1),
-    },
     title: {
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(0.5),
     },
     subtitle: {
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(0.5),
     },
   })
 );
@@ -51,12 +49,12 @@ export default function CarListItem(props: CarListItemProps) {
           border: "1px solid lightgray",
         }}
       />
-      <div className={classes.cardContent}>
+      <div>
         <Typography variant="h2" component="h3" className={classes.title}>
           {`${car.manufacturerName} ${car.modelName}`}
         </Typography>
         <CarDetailsSubtitle
-          variant="body1"
+          variant="body2"
           car={car}
           className={classes.subtitle}
         />

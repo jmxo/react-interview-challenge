@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
     },
     logo: {
-      maxWidth: 200,
+      maxWidth: 160,
     },
     links: {
       "& > * + *": {
@@ -46,7 +46,7 @@ export default function AppBar() {
           <Typography
             className={classes.links}
             color="textPrimary"
-            variant="subtitle1"
+            variant="body1"
             component="nav"
           >
             <Link
