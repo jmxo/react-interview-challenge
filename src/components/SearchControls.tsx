@@ -7,10 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React from "react";
-import { QueryObserverResult, RefetchOptions } from "react-query";
 import useColors from "../hooks/useColors";
 import useManufacturers from "../hooks/useManufacturers";
-import { SearchResult } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,15 +43,14 @@ interface SearchControlsProps {
   manufacturer: string;
   setColor: React.Dispatch<React.SetStateAction<string>>;
   setManufacturer: React.Dispatch<React.SetStateAction<string>>;
-  refetch: (
-    options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<SearchResult, Error>>;
+  handleSubmit: () => void;
 }
 
 export default function SearchControls(props: SearchControlsProps) {
   const classes = useStyles();
 
-  const { color, manufacturer, setColor, setManufacturer, refetch } = props;
+  const { color, manufacturer, setColor, setManufacturer, handleSubmit } =
+    props;
 
   const { data: colors } = useColors();
   const { data: manufacturers } = useManufacturers();
@@ -73,10 +70,6 @@ export default function SearchControls(props: SearchControlsProps) {
     }
   };
 
-  const handleSubmit = () => {
-    refetch();
-  };
-
   return (
     <div className={classes.root}>
       <Card className={classes.cardRoot} variant="outlined" square>
@@ -90,7 +83,7 @@ export default function SearchControls(props: SearchControlsProps) {
             displayEmpty
             className={classes.selectEmpty}
           >
-            <MenuItem value="">All car colors</MenuItem>
+            <MenuItem value="">All Car Colors</MenuItem>
             {colors &&
               colors.length > 0 &&
               colors.map((color) => (
@@ -116,7 +109,7 @@ export default function SearchControls(props: SearchControlsProps) {
             className={classes.selectEmpty}
           >
             <MenuItem value={""} className={classes.menuItem}>
-              All manufacturers
+              All Manufacturers
             </MenuItem>
             {manufacturers &&
               manufacturers.length > 0 &&

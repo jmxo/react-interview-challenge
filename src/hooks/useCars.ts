@@ -6,6 +6,9 @@ export default function useCars(params: SearchFilters) {
   return useQuery<SearchResult, Error>(
     ["cars", params],
     () => fetchCars(params),
-    { keepPreviousData: true, enabled: false }
+    {
+      keepPreviousData: true,
+      // enabled: false
+    }
   );
 }

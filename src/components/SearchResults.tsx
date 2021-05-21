@@ -40,7 +40,7 @@ export default function SearchResults(props: SearchResultsProps) {
   const classes = useStyles();
 
   const { query, page, setPage } = props;
-  const { isLoading, error, data, refetch } = query;
+  const { isLoading, error, data } = query;
   const { cars, totalPageCount, totalCarsCount } = data || {};
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {

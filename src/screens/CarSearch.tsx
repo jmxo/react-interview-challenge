@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SearchControls from "../components/SearchControls";
 import SearchResults from "../components/SearchResults";
@@ -13,17 +13,27 @@ const Container = styled.div`
 `;
 
 export default function CarSearch() {
-  const [color, setColor] = useState<string>("");
-  const [manufacturer, setManufacturer] = useState<string>("");
   const [page, setPage] = useState<number>(1);
 
-  const query = useCars({ color, manufacturer, page, sort: "desc" });
-  const { refetch } = query;
+  // ui state, before clicking Filter
+  const [color, setColor] = useState<string>("");
+  const [manufacturer, setManufacturer] = useState<string>("");
 
-  // `color`/`mfr` have a filter button to manually refetch, for `page` it must be automatic
-  useEffect(() => {
-    refetch();
-  }, [page, refetch]);
+  // params to control the query, after clicking Filter
+  const [queryColor, setQueryColor] = useState<string>("");
+  const [queryManufacturer, setQueryManufacturer] = useState<string>("");
+
+  const query = useCars({
+    color: queryColor,
+    manufacturer: queryManufacturer,
+    page,
+    sort: "desc",
+  });
+
+  const handleSubmit = () => {
+    setQueryColor(color);
+    setQueryManufacturer(manufacturer);
+  };
 
   return (
     <Container>
@@ -32,7 +42,7 @@ export default function CarSearch() {
         manufacturer={manufacturer}
         setColor={setColor}
         setManufacturer={setManufacturer}
-        refetch={refetch}
+        handleSubmit={handleSubmit}
       />
       <SearchResults query={query} page={page} setPage={setPage} />
     </Container>
