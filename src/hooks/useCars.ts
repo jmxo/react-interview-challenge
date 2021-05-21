@@ -8,7 +8,6 @@ export default function useCars(params: SearchFilters) {
     () => fetchCars(params),
     {
       keepPreviousData: true,
-      // enabled: false
     }
   );
 }

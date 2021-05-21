@@ -7,6 +7,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
+import useCar from "../hooks/useCar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,6 +15,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
       padding: theme.spacing(1),
       marginBottom: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      maxWidth: 600,
     },
     aside: {
       width: 300,
@@ -65,20 +68,20 @@ const ContentWrapper = styled.div`
 
 export default function CarDetails() {
   const classes = useStyles();
-  const { stockNumber } = useParams<{ stockNumber: string }>();
+  const { stockNumber: routeStockNumber } =
+    useParams<{ stockNumber: string }>();
 
-  const car = {
-    stockNumber: 10012,
-    manufacturerName: "Dodge",
-    modelName: "Nitro",
-    color: "red",
-    mileage: {
-      number: 164907,
-      unit: "km",
-    },
-    fuelType: "Diesel",
-    pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
-  };
+  const stockNumber = parseInt(routeStockNumber);
+
+  const { isLoading, error, data: car } = useCar(stockNumber);
+
+  if (isLoading) return <div>Loading...</div>; // use react skeleton
+
+  if (error) return <div>{error.message}</div>;
+
+  if (!car) {
+    throw new Error("Car not found!");
+  }
 
   return (
     <Container>

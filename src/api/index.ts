@@ -2,22 +2,6 @@ import { SearchFilters } from "../types";
 
 const API_ROOT = "https://auto1-mock-server.herokuapp.com/api";
 
-export async function fetchCars(params: SearchFilters) {
-  const { manufacturer = "", color = "", sort = "desc", page = 1 } = params;
-
-  const response = await fetch(
-    `${API_ROOT}/cars?manufacturer=${manufacturer}&color=${color}&sort=${sort}&page=${page}`
-  );
-
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-
-  const data = await response.json();
-
-  return data;
-}
-
 export async function fetchColors() {
   const response = await fetch(`${API_ROOT}/colors`);
 
@@ -39,4 +23,32 @@ export async function fetchManufacturers() {
 
   const data = await response.json();
   return data.manufacturers;
+}
+
+export async function fetchCars(params: SearchFilters) {
+  const { manufacturer = "", color = "", sort = "desc", page = 1 } = params;
+
+  const response = await fetch(
+    `${API_ROOT}/cars?manufacturer=${manufacturer}&color=${color}&sort=${sort}&page=${page}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchCar(stockNumber: number) {
+  const response = await fetch(`${API_ROOT}/cars/${stockNumber}`);
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const data = await response.json();
+
+  return data.car;
 }
