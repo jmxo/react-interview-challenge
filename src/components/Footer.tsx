@@ -1,20 +1,25 @@
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import styled from "styled-components";
 
-const Container = styled.div`
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border: 1px solid lightgray;
-`;
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    footer: {
+      height: "80px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#FFF",
+      border: `1px solid ${theme.palette.gray.main}`,
+    },
+  })
+);
 
 export default function Footer() {
+  const classes = useStyles();
   return (
-    <Container>
+    <footer className={classes.footer}>
       <Typography variant="body1">© AUTO1 Group 2018</Typography>
-    </Container>
+    </footer>
   );
 }

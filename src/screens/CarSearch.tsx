@@ -5,8 +5,9 @@ import SearchResults from "../components/SearchResults";
 import useCars from "../hooks/useCars";
 
 const Container = styled.div`
-  display: flex;
   padding: 24px;
+  display: flex;
+  align-items: flex-start;
   @media (max-width: 960px) {
     flex-direction: column;
   }

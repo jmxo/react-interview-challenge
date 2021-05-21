@@ -9,7 +9,6 @@ export const theme = createMuiTheme({
     },
     text: {
       primary: "#4A4A4A",
-      // primary: "#FF0000",
     },
     background: {
       default: "#FFF",

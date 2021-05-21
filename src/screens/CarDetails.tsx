@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       height: 400,
       marginBottom: theme.spacing(2),
+      border: `1px solid ${theme.palette.gray.main}`,
+      backgroundColor: theme.palette.gray.main,
+      backgroundSize: "contain",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
     },
     cardActions: {
       justifyContent: "flex-end",
@@ -81,11 +86,6 @@ export default function CarDetails() {
         className={classes.cardMedia}
         style={{
           backgroundImage: `url(${car.pictureUrl})`,
-          backgroundColor: "#EDEDED",
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          border: "1px solid lightgray",
         }}
       />
       <ContentWrapper>

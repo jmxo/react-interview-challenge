@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 90,
       height: 66,
       marginRight: theme.spacing(3),
+      backgroundSize: "contain",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      border: `1px solid ${theme.palette.gray.main}`,
     },
     title: {
       marginBottom: theme.spacing(0.5),
@@ -43,10 +47,6 @@ export default function CarListItem(props: CarListItemProps) {
         className={classes.cardMedia}
         style={{
           backgroundImage: `url(${car.pictureUrl})`,
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          border: "1px solid lightgray",
         }}
       />
       <div>
