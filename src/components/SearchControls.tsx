@@ -13,10 +13,10 @@ import useManufacturers from "../hooks/useManufacturers";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(3),
+      // padding: theme.spacing(3),
     },
     cardRoot: {
-      width: 400,
+      width: 300,
       padding: theme.spacing(3),
     },
     formControl: {

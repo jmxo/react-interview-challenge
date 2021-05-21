@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
       display: "flex",
       flexDirection: "column",
-      padding: theme.spacing(3),
+      padding: theme.spacing(0, 3),
     },
     cardRoot: {
       minWidth: 275,
@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
     cardContent: {
       padding: theme.spacing(2),
     },
+    title: {
+      marginBottom: theme.spacing(2),
+    },
     subtitle: {
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(3),
     },
     list: {
       marginBottom: theme.spacing(3),
@@ -67,7 +70,7 @@ export default function SearchResults(props: SearchResultsProps) {
   } else {
     content = cars && (
       <div>
-        <Typography variant="h2" component="h1">
+        <Typography variant="h2" component="h1" className={classes.title}>
           Available Cars
         </Typography>
         <Typography variant="subtitle1" className={classes.subtitle}>

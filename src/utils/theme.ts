@@ -14,6 +14,7 @@ export const theme = createMuiTheme({
     background: {
       default: "#FFF",
     },
+    gray: { main: "#EDEDED" },
   },
   typography: {
     fontFamily: "Roboto",
@@ -44,7 +45,19 @@ export const theme = createMuiTheme({
       root: {
         width: 128,
         height: 32,
+        fontSize: "0.875rem", // 14px
+        fontWeight: 400,
       },
     },
   },
 });
+
+// https://material-ui.com/customization/palette/#adding-new-colors
+declare module "@material-ui/core/styles/createPalette" {
+  interface Palette {
+    gray: Palette["primary"];
+  }
+  interface PaletteOptions {
+    gray: PaletteOptions["primary"];
+  }
+}
