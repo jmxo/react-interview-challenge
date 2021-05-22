@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CarDetailsSubtitle(props: Props) {
   const classes = useStyles();
   const { car, className, ...rest } = props;
+
   return (
     <Typography
       variant="subtitle1"

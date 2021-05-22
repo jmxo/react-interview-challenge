@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -20,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     aside: {
       width: 300,
+    },
+    favCard: {
       padding: theme.spacing(3),
       display: "flex",
       flexDirection: "column",
@@ -30,12 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
     subtitle: {
       marginBottom: theme.spacing(2),
     },
-    cardMedia: {
-      width: "100%",
-      height: 400,
+    coverContainer: {
       marginBottom: theme.spacing(2),
+    },
+    cover: {
       border: `1px solid ${theme.palette.gray.main}`,
       backgroundColor: theme.palette.gray.main,
+      width: "100%",
+      height: 400,
       backgroundSize: "contain",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
@@ -73,55 +78,70 @@ export default function CarDetails() {
 
   const stockNumber = parseInt(routeStockNumber);
 
-  const { isLoading, error, data: car } = useCar(stockNumber);
-
-  if (isLoading) return <div>Loading...</div>; // use react skeleton
+  const { status, error, data: car } = useCar(stockNumber);
 
   if (error) return <div>{error.message}</div>;
 
-  if (!car) {
-    throw new Error("Car not found!");
-  }
-
   return (
     <Container>
-      <div
-        className={classes.cardMedia}
-        style={{
-          backgroundImage: `url(${car.pictureUrl})`,
-        }}
-      />
+      <div className={classes.coverContainer}>
+        {status === "loading" ? (
+          <Skeleton variant="rect" height={400} />
+        ) : (
+          car && (
+            <div
+              className={classes.cover}
+              style={{
+                backgroundImage: `url(${car.pictureUrl})`,
+              }}
+            />
+          )
+        )}
+      </div>
+
       <ContentWrapper>
         <main className={classes.main}>
-          <Typography
-            variant="h1"
-            className={classes.title}
-          >{`${car.manufacturerName} ${car.modelName}`}</Typography>
-          <CarDetailsSubtitle car={car} className={classes.subtitle} />
+          <Typography variant="h1" className={classes.title}>
+            {status === "loading" ? (
+              <Skeleton />
+            ) : (
+              car && `${car.manufacturerName} ${car.modelName}`
+            )}
+          </Typography>
+
+          <Typography className={classes.subtitle}>
+            {status === "loading" ? (
+              <Skeleton />
+            ) : (
+              car && <CarDetailsSubtitle car={car} />
+            )}
+          </Typography>
+
           <Typography>
-            This car is currently available and can be delivered as soon as
-            tomorrow morning. Please be aware that delivery times shown in this
-            page are not definitive and may change due to bad weather
-            conditions.
+            {status === "loading" ? (
+              <Skeleton />
+            ) : (
+              "This car is currently available and can be delivered as soon as tomorrow morning. Please be aware that delivery times shown in this page are not definitive and may change due to bad weather conditions."
+            )}
           </Typography>
         </main>
-        <Card
-          component="aside"
-          variant="outlined"
-          square
-          className={classes.aside}
-        >
-          <Typography>
-            If you like this car, click the button and save it in your
-            collection of favourite items.
-          </Typography>
-          <br />
-          <CardActions className={classes.cardActions}>
-            <Button variant="contained" color="primary" disableElevation>
-              Save
-            </Button>
-          </CardActions>
-        </Card>
+
+        <aside className={classes.aside}>
+          {status === "success" && (
+            <Card variant="outlined" square className={classes.favCard}>
+              <Typography>
+                If you like this car, click the button and save it in your
+                collection of favourite items.
+              </Typography>
+
+              <CardActions className={classes.cardActions}>
+                <Button variant="contained" color="primary" disableElevation>
+                  Save
+                </Button>
+              </CardActions>
+            </Card>
+          )}
+        </aside>
       </ContentWrapper>
     </Container>
   );

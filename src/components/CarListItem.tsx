@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundRepeat: "no-repeat",
       border: `1px solid ${theme.palette.gray.main}`,
     },
+    cardContent: {
+      flex: 1,
+    },
     title: {
       marginBottom: theme.spacing(0.5),
     },
@@ -34,30 +37,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface CarListItemProps {
+interface Props {
   car: Car;
 }
 
-export default function CarListItem(props: CarListItemProps) {
+export default function CarListItem({ car }: Props) {
   const classes = useStyles();
-  const { car } = props;
+
   return (
     <Card className={classes.cardRoot} variant="outlined" square>
+      {/* image */}
       <div
         className={classes.cardMedia}
         style={{
           backgroundImage: `url(${car.pictureUrl})`,
         }}
       />
-      <div>
+
+      <div className={classes.cardContent}>
+        {/* Chrysler Crossfire */}
         <Typography variant="h2" component="h3" className={classes.title}>
           {`${car.manufacturerName} ${car.modelName}`}
         </Typography>
+
+        {/* Stock # 61184 - 152.263 KM - Petrol - Yellow */}
         <CarDetailsSubtitle
-          variant="body2"
           car={car}
+          variant="body2"
           className={classes.subtitle}
         />
+
+        {/* Link */}
         <Typography variant="body2">
           <Link to={`/cars/${car.stockNumber}`} component={RouterLink}>
             View details

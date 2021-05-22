@@ -68,64 +68,70 @@ export default function SearchControls(props: SearchControlsProps) {
   };
 
   return (
-    <Card className={classes.cardRoot} variant="outlined" square>
-      <InputLabel id="colors">Color</InputLabel>
-      <FormControl className={classes.formControl} variant="outlined">
-        <Select
-          name="color"
-          labelId="colors"
-          value={color}
-          onChange={handleChange}
-          displayEmpty
-          className={classes.selectEmpty}
-        >
-          <MenuItem value="">All Car Colors</MenuItem>
-          {colors &&
-            colors.length > 0 &&
-            colors.map((color) => (
-              <MenuItem key={color} value={color} className={classes.menuItem}>
-                {color}
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
-      <br />
-      <InputLabel id="manufacturer">Manufacturer</InputLabel>
-      <FormControl className={classes.formControl} variant="outlined">
-        <Select
-          name="manufacturer"
-          labelId="manufacturer"
-          value={manufacturer}
-          onChange={handleChange}
-          displayEmpty
-          className={classes.selectEmpty}
-        >
-          <MenuItem value={""} className={classes.menuItem}>
-            All Manufacturers
-          </MenuItem>
-          {manufacturers &&
-            manufacturers.length > 0 &&
-            manufacturers.map((manu, id) => (
-              <MenuItem
-                key={manu.name}
-                value={manu.name}
-                className={classes.menuItem}
-              >
-                {manu.name}
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
-      <CardActions className={classes.cardActions}>
-        <Button
-          variant="contained"
-          color="primary"
-          disableElevation
-          onClick={handleSubmit}
-        >
-          Filter
-        </Button>
-      </CardActions>
-    </Card>
+    <aside>
+      <Card className={classes.cardRoot} variant="outlined" square>
+        <InputLabel id="colors">Color</InputLabel>
+        <FormControl className={classes.formControl} variant="outlined">
+          <Select
+            name="color"
+            labelId="colors"
+            value={color}
+            onChange={handleChange}
+            displayEmpty
+            className={classes.selectEmpty}
+          >
+            <MenuItem value="">All Car Colors</MenuItem>
+            {colors &&
+              colors.length > 0 &&
+              colors.map((color) => (
+                <MenuItem
+                  key={color}
+                  value={color}
+                  className={classes.menuItem}
+                >
+                  {color}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <br />
+        <InputLabel id="manufacturer">Manufacturer</InputLabel>
+        <FormControl className={classes.formControl} variant="outlined">
+          <Select
+            name="manufacturer"
+            labelId="manufacturer"
+            value={manufacturer}
+            onChange={handleChange}
+            displayEmpty
+            className={classes.selectEmpty}
+          >
+            <MenuItem value={""} className={classes.menuItem}>
+              All Manufacturers
+            </MenuItem>
+            {manufacturers &&
+              manufacturers.length > 0 &&
+              manufacturers.map((manu, id) => (
+                <MenuItem
+                  key={manu.name}
+                  value={manu.name}
+                  className={classes.menuItem}
+                >
+                  {manu.name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <CardActions className={classes.cardActions}>
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            onClick={handleSubmit}
+          >
+            Filter
+          </Button>
+        </CardActions>
+      </Card>
+    </aside>
   );
 }
