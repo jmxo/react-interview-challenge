@@ -2,8 +2,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useErrorHandler } from "react-error-boundary";
-import { UseQueryResult } from "react-query";
-import { SearchResult } from "../types";
+import useCars from "../hooks/useCars";
+import useQueryparams from "../hooks/useQueryParams";
 import CarListItem from "./CarListItem";
 import CarListItemSkeleton from "./CarListItemSkeleton";
 import Pagination from "./Pagination";
@@ -33,23 +33,29 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface SearchResultsProps {
-  query: UseQueryResult<SearchResult, Error>;
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export default function SearchResults(props: SearchResultsProps) {
+export default function SearchResults() {
   const classes = useStyles();
 
-  const { query, page, setPage } = props;
-  const { status, error, data } = query;
+  // get query params from route
+  const { color, manufacturer, page, history, getSearchString } =
+    useQueryparams();
+
+  // use query params from route for react-query
+  const { status, error, data } = useCars({ color, manufacturer, page });
+
   const { cars, totalPageCount, totalCarsCount } = data || {};
 
+  // handler for changing page from pagination component
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    history.push(getSearchString(color, manufacturer, value));
   };
 
+  // handle case where page in route params is out of bounds
+  if (totalPageCount && page > totalPageCount) {
+    history.push(getSearchString(color, manufacturer, 1));
+  }
+
+  // if error is truthy, throw to errorboundary
   useErrorHandler(error);
 
   return (

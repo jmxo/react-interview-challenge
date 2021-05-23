@@ -17,8 +17,8 @@ export interface Manufacturer {
 }
 
 export interface SearchFilters {
-  manufacturer?: string;
-  color?: string;
+  manufacturer?: string | null;
+  color?: string | null;
   sort?: "desc" | "asc";
   page?: number;
 }

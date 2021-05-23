@@ -2,7 +2,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import AppBar from "./components/AppBar";
 import ErrorFallback from "./components/ErrorFallback";
 import Footer from "./components/Footer";
@@ -21,7 +26,10 @@ function App() {
         <Screen>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Switch>
-              <Route exact path="/" component={CarSearch} />
+              <Route exact path="/">
+                <Redirect to="/search" />
+              </Route>
+              <Route exact path="/search" component={CarSearch} />
               <Route exact path="/cars/:stockNumber" component={CarDetails} />
               <Route path="*" component={NoMatch} />
             </Switch>

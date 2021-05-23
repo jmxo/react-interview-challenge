@@ -5,9 +5,10 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useColors from "../hooks/useColors";
 import useManufacturers from "../hooks/useManufacturers";
+import useQueryparams from "../hooks/useQueryParams";
 import Select from "./Select";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,23 +36,47 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface SearchControlsProps {
-  color: string;
-  manufacturer: string;
-  setColor: React.Dispatch<React.SetStateAction<string>>;
-  setManufacturer: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmit: () => void;
-}
-
-export default function SearchControls(props: SearchControlsProps) {
+export default function SearchControls() {
   const classes = useStyles();
 
-  const { color, manufacturer, setColor, setManufacturer, handleSubmit } =
-    props;
+  // ui state for dropdowns, before clicking Filter
+  const [uiColor, setUiColor] = useState<string>("");
+  const [uiManufacturer, setUiManufacturer] = useState<string>("");
 
   const { data: colors } = useColors();
   const { data: manufacturers } = useManufacturers();
 
+  // get query params from route
+  const {
+    color: routeColor,
+    manufacturer: routeManufacturer,
+    history,
+    getSearchString,
+  } = useQueryparams();
+
+  // try to set color dropdown based on route param
+  useEffect(() => {
+    const isValidColor = colors?.some(
+      (c) => c.toLowerCase() === routeColor?.toLowerCase()
+    );
+
+    if (isValidColor) {
+      setUiColor(routeColor.toLowerCase());
+    }
+  }, [routeColor, colors, setUiColor]);
+
+  // try to set Mfr dropdown based on route param
+  useEffect(() => {
+    const isValidManufacturer = manufacturers?.some(
+      (m) => m.name.toLowerCase() === routeManufacturer?.toLowerCase()
+    );
+
+    if (isValidManufacturer) {
+      setUiManufacturer(routeManufacturer.toLowerCase());
+    }
+  }, [routeManufacturer, manufacturers, setUiManufacturer]);
+
+  // handler for dropdowns, only changes UI
   const handleChange = (
     event: React.ChangeEvent<{
       name?: string | undefined;
@@ -60,11 +85,16 @@ export default function SearchControls(props: SearchControlsProps) {
   ) => {
     const { name, value } = event.target;
     if (name === "color") {
-      setColor(value as string);
+      setUiColor(value as string);
     }
     if (name === "manufacturer") {
-      setManufacturer(value as string);
+      setUiManufacturer(value as string);
     }
+  };
+
+  // pressing `Filter` will add the search params to the route
+  const handleSubmit = () => {
+    history.push(getSearchString(uiColor, uiManufacturer, 1));
   };
 
   return (
@@ -75,7 +105,7 @@ export default function SearchControls(props: SearchControlsProps) {
           <Select
             name="color"
             labelId="colors"
-            value={color}
+            value={uiColor}
             onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
@@ -100,7 +130,7 @@ export default function SearchControls(props: SearchControlsProps) {
           <Select
             name="manufacturer"
             labelId="manufacturer"
-            value={manufacturer}
+            value={uiManufacturer}
             onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
@@ -113,7 +143,7 @@ export default function SearchControls(props: SearchControlsProps) {
               manufacturers.map((manu, id) => (
                 <MenuItem
                   key={manu.name}
-                  value={manu.name}
+                  value={manu.name.toLowerCase()}
                   className={classes.menuItem}
                 >
                   {manu.name}
