@@ -7,8 +7,10 @@ import useCars from "../hooks/useCars";
 const Container = styled.div`
   padding: 24px;
   display: flex;
-  @media (max-width: 960px) {
-    flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  @media (max-width: 425px) {
+    padding: 16px 0px;
   }
 `;
 

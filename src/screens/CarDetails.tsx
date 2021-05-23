@@ -113,13 +113,13 @@ export default function CarDetails() {
           </Typography>
 
           {/* Stock # 61184 - 152.263 KM - Petrol - Yellow */}
-          <Typography component="h2" className={classes.subtitle}>
-            {status === "loading" ? (
+          {status === "loading" ? (
+            <Typography component="h2" className={classes.subtitle}>
               <Skeleton />
-            ) : (
-              car && <CarDetailsSubtitle car={car} />
-            )}
-          </Typography>
+            </Typography>
+          ) : (
+            car && <CarDetailsSubtitle car={car} className={classes.subtitle} />
+          )}
 
           {/* Availability */}
           <Typography>

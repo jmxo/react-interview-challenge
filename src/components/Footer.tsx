@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#FFF",
-      border: `1px solid ${theme.palette.gray.main}`,
+      borderTop: `1px solid ${theme.palette.gray.main}`,
     },
   })
 );

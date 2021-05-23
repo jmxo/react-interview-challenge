@@ -10,7 +10,6 @@ import CarDetailsSubtitle from "./CarDetailsSubtitle";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cardRoot: {
-      minWidth: 275,
       height: 90,
       padding: theme.spacing(1.5),
       marginBottom: theme.spacing(1),
@@ -56,7 +55,12 @@ export default function CarListItem({ car }: Props) {
 
       <div className={classes.cardContent}>
         {/* Chrysler Crossfire */}
-        <Typography variant="h2" component="h3" className={classes.title}>
+        <Typography
+          variant="h2"
+          component="h3"
+          className={classes.title}
+          noWrap
+        >
           {`${car.manufacturerName} ${car.modelName}`}
         </Typography>
 
@@ -65,6 +69,7 @@ export default function CarListItem({ car }: Props) {
           car={car}
           variant="body2"
           className={classes.subtitle}
+          noWrap
         />
 
         {/* Link */}

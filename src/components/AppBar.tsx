@@ -1,4 +1,5 @@
 import MuiAppBar from "@material-ui/core/AppBar";
+import Hidden from "@material-ui/core/Hidden";
 import Link from "@material-ui/core/Link";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.primary,
       height: "80px",
       justifyContent: "center",
+      borderBottom: `1px solid ${theme.palette.gray.main}`,
     },
     logo: {
       maxWidth: 160,
@@ -33,47 +35,50 @@ export default function AppBar() {
     <div className={classes.root}>
       <MuiAppBar
         position="static"
+        elevation={0}
         classes={{
           root: classes.root,
         }}
-        variant="outlined"
       >
         <Toolbar>
           <RouterLink to="/">
             <img src={logo} alt="Auto1 logo" className={classes.logo} />
           </RouterLink>
           <div style={{ flex: 1 }}></div>
-          <Typography
-            className={classes.links}
-            color="textPrimary"
-            variant="body1"
-            component="nav"
-          >
-            <Link
-              to="#"
-              component={RouterLink}
-              color="inherit"
-              underline="none"
+
+          <Hidden xsDown>
+            <Typography
+              className={classes.links}
+              color="textPrimary"
+              variant="body1"
+              component="nav"
             >
-              Purchase
-            </Link>
-            <Link
-              to="#"
-              component={RouterLink}
-              color="inherit"
-              underline="none"
-            >
-              My Orders
-            </Link>
-            <Link
-              to="#"
-              component={RouterLink}
-              color="inherit"
-              underline="none"
-            >
-              Sell
-            </Link>
-          </Typography>
+              <Link
+                to="#"
+                component={RouterLink}
+                color="inherit"
+                underline="none"
+              >
+                Purchase
+              </Link>
+              <Link
+                to="#"
+                component={RouterLink}
+                color="inherit"
+                underline="none"
+              >
+                My Orders
+              </Link>
+              <Link
+                to="#"
+                component={RouterLink}
+                color="inherit"
+                underline="none"
+              >
+                Sell
+              </Link>
+            </Typography>
+          </Hidden>
         </Toolbar>
       </MuiAppBar>
     </div>

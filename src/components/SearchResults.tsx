@@ -12,15 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
+      maxWidth: 650,
       display: "flex",
       flexDirection: "column",
       padding: theme.spacing(0, 3),
-    },
-    cardRoot: {
-      minWidth: 275,
-    },
-    cardContent: {
-      padding: theme.spacing(2),
+      "@media (max-width: 425px)": {
+        padding: "8px",
+        width: "100%",
+      },
     },
     title: {
       marginBottom: theme.spacing(2),
