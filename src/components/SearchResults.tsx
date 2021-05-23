@@ -1,6 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { UseQueryResult } from "react-query";
 import { SearchResult } from "../types";
 import CarListItem from "./CarListItem";
@@ -50,9 +51,7 @@ export default function SearchResults(props: SearchResultsProps) {
     setPage(value);
   };
 
-  if (error) {
-    return <div>{error.message}</div>;
-  }
+  useErrorHandler(error);
 
   return (
     <main className={classes.root}>

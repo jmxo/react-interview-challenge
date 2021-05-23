@@ -5,6 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
@@ -80,10 +81,11 @@ export default function CarDetails() {
 
   const { status, error, data: car } = useCar(stockNumber);
 
-  if (error) return <div>{error.message}</div>;
+  useErrorHandler(error);
 
   return (
     <Container>
+      {/* Image */}
       <div className={classes.coverContainer}>
         {status === "loading" ? (
           <Skeleton variant="rect" height={400} />
@@ -101,6 +103,7 @@ export default function CarDetails() {
 
       <ContentWrapper>
         <main className={classes.main}>
+          {/* Chrysler Crossfire */}
           <Typography variant="h1" className={classes.title}>
             {status === "loading" ? (
               <Skeleton />
@@ -109,7 +112,8 @@ export default function CarDetails() {
             )}
           </Typography>
 
-          <Typography className={classes.subtitle}>
+          {/* Stock # 61184 - 152.263 KM - Petrol - Yellow */}
+          <Typography component="h2" className={classes.subtitle}>
             {status === "loading" ? (
               <Skeleton />
             ) : (
@@ -117,6 +121,7 @@ export default function CarDetails() {
             )}
           </Typography>
 
+          {/* Availability */}
           <Typography>
             {status === "loading" ? (
               <Skeleton />

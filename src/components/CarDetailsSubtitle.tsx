@@ -22,6 +22,7 @@ export default function CarDetailsSubtitle(props: Props) {
   return (
     <Typography
       variant="subtitle1"
+      component="span" // can be overridden or nested under another `header` typography
       {...rest}
       className={classes.capitalize + " " + className}
     >
