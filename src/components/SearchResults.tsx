@@ -76,7 +76,7 @@ export default function SearchResults() {
         )}
       </Typography>
 
-      <div className={classes.list}>
+      <div className={classes.list} data-testid="car-list">
         {status === "loading" &&
           [...new Array(10)].map((item, idx) => (
             <CarListItemSkeleton key={idx} />

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 export default function useQueryparams() {
@@ -9,10 +10,12 @@ export default function useQueryparams() {
   let pageString = queryParams.get("page");
   let page = parseInt(pageString ?? "");
 
-  if (isNaN(page)) {
-    page = 1;
-    history.push(getSearchString(color, manufacturer, page));
-  }
+  // if page not specified in route, make it explicit
+  useEffect(() => {
+    if (!page) {
+      history.push(getSearchString(color, manufacturer, 1));
+    }
+  }, [color, history, manufacturer, page]);
 
   return {
     history,

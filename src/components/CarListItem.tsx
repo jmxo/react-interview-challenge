@@ -44,13 +44,19 @@ export default function CarListItem({ car }: Props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.cardRoot} variant="outlined" square>
+    <Card
+      className={classes.cardRoot}
+      variant="outlined"
+      square
+      data-testid="car"
+    >
       {/* image */}
       <div
         className={classes.cardMedia}
         style={{
           backgroundImage: `url(${car.pictureUrl})`,
         }}
+        role="img"
       />
 
       <div className={classes.cardContent}>

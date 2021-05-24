@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "msw": "^0.29.0",
     "prettier": "2.3.0"
   }
 }

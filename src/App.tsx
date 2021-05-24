@@ -2,6 +2,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { QueryClient, QueryClientProvider } from "react-query";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -17,27 +18,31 @@ import CarSearch from "./screens/CarSearch";
 import NoMatch from "./screens/NoMatch";
 import { theme } from "./utils/theme";
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <AppBar />
-        <Screen>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/search" />
-              </Route>
-              <Route exact path="/search" component={CarSearch} />
-              <Route exact path="/cars/:stockNumber" component={CarDetails} />
-              <Route path="*" component={NoMatch} />
-            </Switch>
-          </ErrorBoundary>
-        </Screen>
-        <Footer />
-      </Router>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <AppBar />
+          <Screen>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/search" />
+                </Route>
+                <Route exact path="/search" component={CarSearch} />
+                <Route exact path="/cars/:stockNumber" component={CarDetails} />
+                <Route path="*" component={NoMatch} />
+              </Switch>
+            </ErrorBoundary>
+          </Screen>
+          <Footer />
+        </Router>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
