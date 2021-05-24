@@ -1,10 +1,6 @@
 import React from "react";
-import { FallbackProps } from "react-error-boundary";
 
-export default function ErrorFallback({
-  error,
-  resetErrorBoundary,
-}: FallbackProps) {
+export default function ErrorFallback({ error }: { error: Error }) {
   return (
     <div role="alert" style={{ padding: 24 }}>
       <p>Something went wrong:</p>
