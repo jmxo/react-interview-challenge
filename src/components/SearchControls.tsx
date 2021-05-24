@@ -6,6 +6,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
+import { useErrorHandler } from "react-error-boundary";
 import useColors from "../hooks/useColors";
 import useManufacturers from "../hooks/useManufacturers";
 import useQueryparams from "../hooks/useQueryParams";
@@ -43,8 +44,12 @@ export default function SearchControls() {
   const [uiColor, setUiColor] = useState<string>("");
   const [uiManufacturer, setUiManufacturer] = useState<string>("");
 
-  const { data: colors } = useColors();
-  const { data: manufacturers } = useManufacturers();
+  const { data: colors, error: colorsError } = useColors();
+
+  const { data: manufacturers, error: manufacturersError } = useManufacturers();
+
+  // if error is truthy, throw to errorboundary
+  useErrorHandler(colorsError || manufacturersError);
 
   // get query params from route
   const {

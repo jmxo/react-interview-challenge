@@ -18,7 +18,13 @@ import CarSearch from "./screens/CarSearch";
 import NoMatch from "./screens/NoMatch";
 import { theme } from "./utils/theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 function App() {
   return (
