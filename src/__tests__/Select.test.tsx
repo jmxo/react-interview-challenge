@@ -26,6 +26,4 @@ test("Select", () => {
       name: /all car colors/i,
     })
   ).toBeInTheDocument();
-
-  screen.debug();
 });

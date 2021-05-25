@@ -1,4 +1,4 @@
-const mockCars = {
+const mockCarsPage1Response = {
   cars: [
     {
       stockNumber: 84797,
@@ -123,6 +123,387 @@ const mockCars = {
   ],
   totalPageCount: 100,
   totalCarsCount: 1000,
+};
+
+const mockCarsPage2Response = {
+  cars: [
+    {
+      stockNumber: 94813,
+      manufacturerName: "Tesla",
+      modelName: "Model S",
+      color: "silver",
+      mileage: {
+        number: 198554,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 63366,
+      manufacturerName: "Skoda",
+      modelName: "Favorit",
+      color: "red",
+      mileage: {
+        number: 198443,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 48698,
+      manufacturerName: "Audi",
+      modelName: "Q3",
+      color: "green",
+      mileage: {
+        number: 198263,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 58776,
+      manufacturerName: "Tesla",
+      modelName: "Roadster",
+      color: "green",
+      mileage: {
+        number: 198095,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 52660,
+      manufacturerName: "Fiat",
+      modelName: "126",
+      color: "blue",
+      mileage: {
+        number: 197927,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 28925,
+      manufacturerName: "Skoda",
+      modelName: "Roomster",
+      color: "blue",
+      mileage: {
+        number: 197871,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 38004,
+      manufacturerName: "Porsche",
+      modelName: "718 Cayman",
+      color: "red",
+      mileage: {
+        number: 197774,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 97106,
+      manufacturerName: "Volkswagen",
+      modelName: "T4",
+      color: "silver",
+      mileage: {
+        number: 197737,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 99004,
+      manufacturerName: "Skoda",
+      modelName: "Forman",
+      color: "silver",
+      mileage: {
+        number: 197715,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 53975,
+      manufacturerName: "Chrysler",
+      modelName: "Neon",
+      color: "blue",
+      mileage: {
+        number: 197534,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+  ],
+  totalPageCount: 100,
+  totalCarsCount: 1000,
+};
+
+const mockCarsOnlyWhite = {
+  cars: [
+    {
+      stockNumber: 60985,
+      manufacturerName: "Fiat",
+      modelName: "Albea",
+      color: "white",
+      mileage: {
+        number: 199875,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 79322,
+      manufacturerName: "Porsche",
+      modelName: "968",
+      color: "white",
+      mileage: {
+        number: 198997,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 79537,
+      manufacturerName: "Skoda",
+      modelName: "Forman",
+      color: "white",
+      mileage: {
+        number: 198816,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 98167,
+      manufacturerName: "Tesla",
+      modelName: "Model S",
+      color: "white",
+      mileage: {
+        number: 198809,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 66181,
+      manufacturerName: "Chrysler",
+      modelName: "GTS",
+      color: "white",
+      mileage: {
+        number: 198724,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 68601,
+      manufacturerName: "Dodge",
+      modelName: "Avenger",
+      color: "white",
+      mileage: {
+        number: 197402,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 79540,
+      manufacturerName: "Mercedes-Benz",
+      modelName: "123",
+      color: "white",
+      mileage: {
+        number: 197006,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 35183,
+      manufacturerName: "Porsche",
+      modelName: "924",
+      color: "white",
+      mileage: {
+        number: 196723,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 36054,
+      manufacturerName: "Volkswagen",
+      modelName: "Golf VII",
+      color: "white",
+      mileage: {
+        number: 196650,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 11080,
+      manufacturerName: "Dodge",
+      modelName: "Avenger",
+      color: "white",
+      mileage: {
+        number: 194724,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+  ],
+  totalPageCount: 17,
+  totalCarsCount: 166,
+};
+
+const mockCarsOnlyAudi = {
+  cars: [
+    {
+      stockNumber: 98952,
+      manufacturerName: "Audi",
+      modelName: "V8",
+      color: "yellow",
+      mileage: {
+        number: 199135,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 39777,
+      manufacturerName: "Audi",
+      modelName: "A1",
+      color: "green",
+      mileage: {
+        number: 198734,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 48698,
+      manufacturerName: "Audi",
+      modelName: "Q3",
+      color: "green",
+      mileage: {
+        number: 198263,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 76159,
+      manufacturerName: "Audi",
+      modelName: "A6",
+      color: "yellow",
+      mileage: {
+        number: 190790,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 45790,
+      manufacturerName: "Audi",
+      modelName: "RS 4",
+      color: "yellow",
+      mileage: {
+        number: 186682,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 40515,
+      manufacturerName: "Audi",
+      modelName: "A6 Allroad",
+      color: "black",
+      mileage: {
+        number: 186613,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 21535,
+      manufacturerName: "Audi",
+      modelName: "S8",
+      color: "white",
+      mileage: {
+        number: 185396,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 64717,
+      manufacturerName: "Audi",
+      modelName: "SQ7",
+      color: "silver",
+      mileage: {
+        number: 184940,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 21239,
+      manufacturerName: "Audi",
+      modelName: "S1",
+      color: "white",
+      mileage: {
+        number: 182881,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 81481,
+      manufacturerName: "Audi",
+      modelName: "S4",
+      color: "black",
+      mileage: {
+        number: 181325,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+  ],
+  totalPageCount: 7,
+  totalCarsCount: 66,
 };
 
 const mockColors = {
@@ -916,4 +1297,27 @@ const mockManufacturers = {
   ],
 };
 
-export { mockCars, mockColors, mockManufacturers };
+const mockCarResponse = {
+  car: {
+    stockNumber: 84797,
+    manufacturerName: "BMW",
+    modelName: "5er",
+    color: "black",
+    mileage: {
+      number: 199956,
+      unit: "km",
+    },
+    fuelType: "Diesel",
+    pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+  },
+};
+
+export {
+  mockCarsPage1Response,
+  mockCarsPage2Response,
+  mockCarsOnlyWhite,
+  mockCarsOnlyAudi,
+  mockColors,
+  mockManufacturers,
+  mockCarResponse,
+};

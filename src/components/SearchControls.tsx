@@ -45,7 +45,6 @@ export default function SearchControls() {
   const [uiManufacturer, setUiManufacturer] = useState<string>("");
 
   const { data: colors, error: colorsError } = useColors();
-
   const { data: manufacturers, error: manufacturersError } = useManufacturers();
 
   // if error is truthy, throw to errorboundary
@@ -104,7 +103,12 @@ export default function SearchControls() {
 
   return (
     <aside>
-      <Card className={classes.cardRoot} variant="outlined" square>
+      <Card
+        className={classes.cardRoot}
+        variant="outlined"
+        square
+        data-testid="search-controls"
+      >
         <InputLabel id="colors">Color</InputLabel>
         <FormControl className={classes.formControl} variant="outlined">
           <Select
@@ -114,6 +118,7 @@ export default function SearchControls() {
             onChange={handleChange}
             displayEmpty
             className={classes.selectEmpty}
+            data-testid="color-select"
           >
             <MenuItem value="">All Car Colors</MenuItem>
             {colors &&

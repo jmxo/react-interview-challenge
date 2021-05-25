@@ -96,6 +96,7 @@ export default function CarDetails() {
               style={{
                 backgroundImage: `url(${car.pictureUrl})`,
               }}
+              data-testid="car-details-cover"
             />
           )
         )}
