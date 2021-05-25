@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useErrorHandler } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -74,6 +74,24 @@ const ContentWrapper = styled.div`
 
 export default function CarDetails() {
   const classes = useStyles();
+
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const valueInStorage = window.localStorage.getItem(
+      "moismat/react-task/favorites"
+    );
+    if (valueInStorage) {
+      return JSON.parse(valueInStorage);
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "moismat/react-task/favorites",
+      JSON.stringify(favorites)
+    );
+  }, [favorites]);
+
   const { stockNumber: routeStockNumber } =
     useParams<{ stockNumber: string }>();
 
@@ -82,6 +100,16 @@ export default function CarDetails() {
   const { status, error, data: car } = useCar(stockNumber);
 
   useErrorHandler(error);
+
+  const isFavorite = favorites.includes(routeStockNumber);
+
+  const handleClick = () => {
+    if (isFavorite) {
+      setFavorites(favorites.filter((i) => i !== routeStockNumber));
+    } else {
+      setFavorites([...favorites, routeStockNumber]);
+    }
+  };
 
   return (
     <Container>
@@ -136,13 +164,20 @@ export default function CarDetails() {
           {status === "success" && (
             <Card variant="outlined" square className={classes.favCard}>
               <Typography>
-                If you like this car, click the button and save it in your
-                collection of favourite items.
+                {isFavorite
+                  ? `This car is saved in your collection of favourite items.`
+                  : `If you like this car, click the button and save it in your
+                collection of favourite items.`}
               </Typography>
 
               <CardActions className={classes.cardActions}>
-                <Button variant="contained" color="primary" disableElevation>
-                  Save
+                <Button
+                  onClick={handleClick}
+                  variant="contained"
+                  color="primary"
+                  disableElevation
+                >
+                  {isFavorite ? "Remove" : "Save"}
                 </Button>
               </CardActions>
             </Card>
