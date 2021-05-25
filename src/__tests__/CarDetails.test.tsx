@@ -64,7 +64,8 @@ test("Show the details of a selected car", async () => {
     <p
       class="MuiTypography-root MuiTypography-body1"
     >
-      If you like this car, click the button and save it in your collection of favourite items.
+      If you like this car, click the button and save it in your
+                    collection of favourite items.
     </p>
   `);
 

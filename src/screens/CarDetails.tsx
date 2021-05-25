@@ -4,12 +4,13 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useErrorHandler } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
 import useCar from "../hooks/useCar";
+import useLocalStorageFavorites from "../hooks/useLocalStorageFavorites";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,22 +76,7 @@ const ContentWrapper = styled.div`
 export default function CarDetails() {
   const classes = useStyles();
 
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    const valueInStorage = window.localStorage.getItem(
-      "moismat/react-task/favorites"
-    );
-    if (valueInStorage) {
-      return JSON.parse(valueInStorage);
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem(
-      "moismat/react-task/favorites",
-      JSON.stringify(favorites)
-    );
-  }, [favorites]);
+  const [favorites, setFavorites] = useLocalStorageFavorites([]);
 
   const { stockNumber: routeStockNumber } =
     useParams<{ stockNumber: string }>();
