@@ -1,4 +1,4 @@
-const mockCarsPage1Response = {
+const mockCarsPage1 = {
   cars: [
     {
       stockNumber: 84797,
@@ -125,7 +125,7 @@ const mockCarsPage1Response = {
   totalCarsCount: 1000,
 };
 
-const mockCarsPage2Response = {
+const mockCarsPage2 = {
   cars: [
     {
       stockNumber: 94813,
@@ -504,6 +504,152 @@ const mockCarsOnlyAudi = {
   ],
   totalPageCount: 7,
   totalCarsCount: 66,
+};
+
+const mockCarsBlackBMW = {
+  cars: [
+    {
+      stockNumber: 18359,
+      manufacturerName: "BMW",
+      modelName: "6er",
+      color: "black",
+      mileage: {
+        number: 197772,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 74345,
+      manufacturerName: "BMW",
+      modelName: "X3",
+      color: "black",
+      mileage: {
+        number: 197599,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 46028,
+      manufacturerName: "BMW",
+      modelName: "X1",
+      color: "black",
+      mileage: {
+        number: 196511,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 90793,
+      manufacturerName: "BMW",
+      modelName: "X4",
+      color: "black",
+      mileage: {
+        number: 194306,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 26665,
+      manufacturerName: "BMW",
+      modelName: "X5",
+      color: "black",
+      mileage: {
+        number: 187116,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 26853,
+      manufacturerName: "BMW",
+      modelName: "4er",
+      color: "black",
+      mileage: {
+        number: 186995,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 56946,
+      manufacturerName: "BMW",
+      modelName: "4er",
+      color: "black",
+      mileage: {
+        number: 178812,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 95179,
+      manufacturerName: "BMW",
+      modelName: "6er",
+      color: "black",
+      mileage: {
+        number: 173915,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 49252,
+      manufacturerName: "BMW",
+      modelName: "Z4",
+      color: "black",
+      mileage: {
+        number: 172587,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+    {
+      stockNumber: 26003,
+      manufacturerName: "BMW",
+      modelName: "6er",
+      color: "black",
+      mileage: {
+        number: 171837,
+        unit: "km",
+      },
+      fuelType: "Diesel",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+  ],
+  totalPageCount: 3,
+  totalCarsCount: 27,
+};
+
+const mockCarsBlackBMWPage2 = {
+  cars: [
+    {
+      stockNumber: 83245,
+      manufacturerName: "BMW",
+      modelName: "2er",
+      color: "black",
+      mileage: {
+        number: 169930,
+        unit: "km",
+      },
+      fuelType: "Petrol",
+      pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
+    },
+  ],
+  totalPageCount: 3,
+  totalCarsCount: 27,
 };
 
 const mockColors = {
@@ -1313,10 +1459,12 @@ const mockCarResponse = {
 };
 
 export {
-  mockCarsPage1Response,
-  mockCarsPage2Response,
+  mockCarsPage1,
+  mockCarsPage2,
   mockCarsOnlyWhite,
   mockCarsOnlyAudi,
+  mockCarsBlackBMW,
+  mockCarsBlackBMWPage2,
   mockColors,
   mockManufacturers,
   mockCarResponse,

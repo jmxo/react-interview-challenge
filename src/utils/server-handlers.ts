@@ -1,54 +1,55 @@
 import { rest } from "msw";
-import {
-  mockCarResponse,
-  mockCarsOnlyAudi,
-  mockCarsOnlyWhite,
-  mockCarsPage1Response,
-  mockCarsPage2Response,
-  mockColors,
-  mockManufacturers,
-} from "./mockData";
+import * as mockData from "./mock-data";
 
 const handlers = [
   rest.get(
     "https://auto1-mock-server.herokuapp.com/api/cars",
     (req, res, ctx) => {
       const query = req.url.searchParams;
-      const page = query.get("page");
+      const page = String(query.get("page"));
       const color = query.get("color");
       const manufacturer = query.get("manufacturer");
 
-      if (color === "white") {
-        return res(ctx.json(mockCarsOnlyWhite));
+      if (color === "white" && manufacturer === "") {
+        return res(ctx.json(mockData.mockCarsOnlyWhite));
       }
 
-      if (manufacturer === "audi") {
-        return res(ctx.json(mockCarsOnlyAudi));
+      if (manufacturer === "audi" && color === "") {
+        return res(ctx.json(mockData.mockCarsOnlyAudi));
       }
 
-      if (String(page) === "2") {
-        return res(ctx.json(mockCarsPage2Response));
+      if (manufacturer === "bmw" && color === "black" && page === "1") {
+        return res(ctx.json(mockData.mockCarsBlackBMW));
       }
 
-      return res(ctx.json(mockCarsPage1Response));
+      if (manufacturer === "bmw" && color === "black" && page === "2") {
+        return res(ctx.json(mockData.mockCarsBlackBMWPage2));
+      }
+
+      if (color === "" && manufacturer === "" && page === "2") {
+        return res(ctx.json(mockData.mockCarsPage2));
+      }
+
+      // color "", manufacturer "", page 1
+      return res(ctx.json(mockData.mockCarsPage1));
     }
   ),
   rest.get(
     "https://auto1-mock-server.herokuapp.com/api/colors",
     (req, res, ctx) => {
-      return res(ctx.json(mockColors));
+      return res(ctx.json(mockData.mockColors));
     }
   ),
   rest.get(
     "https://auto1-mock-server.herokuapp.com/api/manufacturers",
     (req, res, ctx) => {
-      return res(ctx.json(mockManufacturers));
+      return res(ctx.json(mockData.mockManufacturers));
     }
   ),
   rest.get(
     "https://auto1-mock-server.herokuapp.com/api/cars/84797",
     (req, res, ctx) => {
-      return res(ctx.json(mockCarResponse));
+      return res(ctx.json(mockData.mockCarResponse));
     }
   ),
 ];

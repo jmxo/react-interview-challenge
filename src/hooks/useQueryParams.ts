@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-export default function useQueryparams() {
+export default function useQueryParams() {
   let history = useHistory();
 
   const queryParams = new URLSearchParams(useLocation().search);

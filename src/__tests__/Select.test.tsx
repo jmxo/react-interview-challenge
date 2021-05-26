@@ -1,7 +1,7 @@
 import MenuItem from "@material-ui/core/MenuItem";
 import React from "react";
 import Select from "../components/Select";
-import { mockColors } from "../utils/mockData";
+import { mockColors } from "../utils/mock-data";
 import { render, screen } from "../utils/test-utils";
 
 // only testing presentation

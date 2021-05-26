@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { useErrorHandler } from "react-error-boundary";
 import useCars from "../hooks/useCars";
-import useQueryparams from "../hooks/useQueryParams";
+import useQueryParams from "../hooks/useQueryParams";
 import CarListItem from "./CarListItem";
 import CarListItemSkeleton from "./CarListItemSkeleton";
 import Pagination from "./Pagination";
@@ -38,7 +38,7 @@ export default function SearchResults() {
 
   // get query params from route
   const { color, manufacturer, page, history, getSearchString } =
-    useQueryparams();
+    useQueryParams();
 
   // use query params from route for react-query
   const { status, error, data } = useCars({ color, manufacturer, page });

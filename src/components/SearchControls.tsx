@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useErrorHandler } from "react-error-boundary";
 import useColors from "../hooks/useColors";
 import useManufacturers from "../hooks/useManufacturers";
-import useQueryparams from "../hooks/useQueryParams";
+import useQueryParams from "../hooks/useQueryParams";
 import Select from "./Select";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -56,7 +56,7 @@ export default function SearchControls() {
     manufacturer: routeManufacturer,
     history,
     getSearchString,
-  } = useQueryparams();
+  } = useQueryParams();
 
   // try to set color dropdown based on route param
   useEffect(() => {
