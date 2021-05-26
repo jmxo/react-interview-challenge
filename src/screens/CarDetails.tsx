@@ -8,9 +8,9 @@ import React from "react";
 import { useErrorHandler } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import useLocalStorageState from "use-local-storage-state";
 import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
 import useCar from "../hooks/useCar";
-import useLocalStorageFavorites from "../hooks/useLocalStorageFavorites";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,7 +76,10 @@ const ContentWrapper = styled.div`
 export default function CarDetails() {
   const classes = useStyles();
 
-  const [favorites, setFavorites] = useLocalStorageFavorites([]);
+  const [favorites, setFavorites] = useLocalStorageState<string[]>(
+    "moismat/react-project/favorites",
+    []
+  );
 
   const { stockNumber: routeStockNumber } =
     useParams<{ stockNumber: string }>();
