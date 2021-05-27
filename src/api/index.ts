@@ -21,7 +21,7 @@ export async function fetchCars(params: SearchFilters) {
   return response.data;
 }
 
-export async function fetchCar(stockNumber: number) {
+export async function fetchCar(stockNumber: string) {
   const response = await axios.get(`${API_ROOT}/cars/${stockNumber}`);
   return response.data.car;
 }

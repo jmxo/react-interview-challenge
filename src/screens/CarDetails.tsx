@@ -76,27 +76,29 @@ const ContentWrapper = styled.div`
 export default function CarDetails() {
   const classes = useStyles();
 
+  // persist favorites in localstorage
   const [favorites, setFavorites] = useLocalStorageState<string[]>(
     "moismat/react-project/favorites",
     []
   );
 
-  const { stockNumber: routeStockNumber } =
-    useParams<{ stockNumber: string }>();
+  // get stock number from query params
+  const { stockNumber } = useParams<{ stockNumber: string }>();
 
-  const stockNumber = parseInt(routeStockNumber);
-
+  // use stock number to fetch car details
   const { status, error, data: car } = useCar(stockNumber);
 
+  // if error is truthy, throw to error boundary
   useErrorHandler(error);
 
-  const isFavorite = favorites.includes(routeStockNumber);
+  const isFavorite = favorites.includes(stockNumber);
 
+  // handler for Save/Remove button
   const handleClick = () => {
     if (isFavorite) {
-      setFavorites(favorites.filter((i) => i !== routeStockNumber));
+      setFavorites(favorites.filter((i) => i !== stockNumber));
     } else {
-      setFavorites([...favorites, routeStockNumber]);
+      setFavorites([...favorites, stockNumber]);
     }
   };
 

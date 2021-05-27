@@ -1443,7 +1443,7 @@ const mockManufacturers = {
   ],
 };
 
-const mockCarResponse = {
+const mockCar = {
   car: {
     stockNumber: 84797,
     manufacturerName: "BMW",
@@ -1467,5 +1467,5 @@ export {
   mockCarsBlackBMWPage2,
   mockColors,
   mockManufacturers,
-  mockCarResponse,
+  mockCar,
 };

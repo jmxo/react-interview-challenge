@@ -44,6 +44,7 @@ export default function SearchControls() {
   const [uiColor, setUiColor] = useState<string>("");
   const [uiManufacturer, setUiManufacturer] = useState<string>("");
 
+  // fetch colors/manufacturers from api, to show inside dropdowns
   const { data: colors, error: colorsError } = useColors();
   const { data: manufacturers, error: manufacturersError } = useManufacturers();
 
@@ -134,7 +135,9 @@ export default function SearchControls() {
               ))}
           </Select>
         </FormControl>
+
         <br />
+
         <InputLabel id="manufacturer">Manufacturer</InputLabel>
         <FormControl className={classes.formControl} variant="outlined">
           <Select
@@ -161,6 +164,7 @@ export default function SearchControls() {
               ))}
           </Select>
         </FormControl>
+
         <CardActions className={classes.cardActions}>
           <Button
             variant="contained"

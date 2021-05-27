@@ -33,13 +33,7 @@ export default function AppBar() {
 
   return (
     <div className={classes.root}>
-      <MuiAppBar
-        position="static"
-        elevation={0}
-        classes={{
-          root: classes.root,
-        }}
-      >
+      <MuiAppBar position="static" elevation={0} className={classes.root}>
         <Toolbar>
           <RouterLink to="/">
             <img src={logo} alt="Auto1 logo" className={classes.logo} />

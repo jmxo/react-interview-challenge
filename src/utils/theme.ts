@@ -13,7 +13,9 @@ export const theme = createMuiTheme({
     background: {
       default: "#FFF",
     },
-    gray: { main: "#EDEDED" },
+    gray: {
+      main: "#EDEDED",
+    },
   },
   typography: {
     fontFamily: "Roboto",

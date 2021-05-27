@@ -7,15 +7,20 @@ export default function useQueryParams() {
   const queryParams = new URLSearchParams(useLocation().search);
   let color = queryParams.get("color") ?? "";
   let manufacturer = queryParams.get("manufacturer") ?? "";
+
   let pageString = queryParams.get("page");
   let page = parseInt(pageString ?? "");
 
-  // if page not specified in route, make it explicit
+  if (Number.isNaN(page)) {
+    page = 1;
+  }
+
+  // if ?page= is not specified in route, make it explicit
   useEffect(() => {
-    if (!page) {
+    if (Number.isNaN(parseInt(pageString ?? ""))) {
       history.push(getSearchString(color, manufacturer, 1));
     }
-  }, [color, history, manufacturer, page]);
+  }, [color, history, manufacturer, page, pageString]);
 
   return {
     history,

@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
     list: {
       marginBottom: theme.spacing(3),
     },
+    paginationContainer: {
+      display: "flex",
+      justifyContent: "center",
+    },
   })
 );
 
@@ -93,7 +97,7 @@ export default function SearchResults() {
           ))}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className={classes.paginationContainer}>
         <Pagination
           count={totalPageCount}
           page={page}

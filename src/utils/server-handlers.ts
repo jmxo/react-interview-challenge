@@ -49,7 +49,7 @@ const handlers = [
   rest.get(
     "https://auto1-mock-server.herokuapp.com/api/cars/84797",
     (req, res, ctx) => {
-      return res(ctx.json(mockData.mockCarResponse));
+      return res(ctx.json(mockData.mockCar));
     }
   ),
 ];

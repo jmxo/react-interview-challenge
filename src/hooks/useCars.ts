@@ -7,7 +7,7 @@ export default function useCars(params: SearchFilters) {
     ["cars", params],
     () => fetchCars(params),
     {
-      keepPreviousData: true,
+      keepPreviousData: true, // https://react-query.tanstack.com/guides/paginated-queries#better-paginated-queries-with-keeppreviousdata
     }
   );
 }
