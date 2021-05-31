@@ -33,7 +33,7 @@ export default function AppBar() {
 
   return (
     <div className={classes.root}>
-      <MuiAppBar position="static" elevation={0} className={classes.root}>
+      <MuiAppBar position="static" className={classes.root}>
         <Toolbar>
           <RouterLink to="/">
             <img src={logo} alt="Auto1 logo" className={classes.logo} />
@@ -44,11 +44,10 @@ export default function AppBar() {
             <Typography
               className={classes.links}
               color="textPrimary"
-              variant="body1"
               component="nav"
             >
               <Link
-                to="#"
+                to="/"
                 component={RouterLink}
                 color="inherit"
                 underline="none"
@@ -56,7 +55,7 @@ export default function AppBar() {
                 Purchase
               </Link>
               <Link
-                to="#"
+                to="/"
                 component={RouterLink}
                 color="inherit"
                 underline="none"
@@ -64,7 +63,7 @@ export default function AppBar() {
                 My Orders
               </Link>
               <Link
-                to="#"
+                to="/"
                 component={RouterLink}
                 color="inherit"
                 underline="none"

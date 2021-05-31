@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CarDetailsSubtitle(props: Props) {
+export default function CarDetailsSummary(props: Props) {
   const classes = useStyles();
   const { car, className, ...rest } = props;
 

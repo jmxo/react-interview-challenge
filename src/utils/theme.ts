@@ -51,6 +51,22 @@ export const theme = createMuiTheme({
       },
     },
   },
+  props: {
+    MuiCard: {
+      variant: "outlined",
+      square: true,
+    },
+    MuiButton: {
+      variant: "contained",
+      disableElevation: true,
+    },
+    MuiFormControl: {
+      variant: "outlined",
+    },
+    MuiAppBar: {
+      elevation: 0,
+    },
+  },
 });
 
 // https://material-ui.com/customization/palette/#adding-new-colors

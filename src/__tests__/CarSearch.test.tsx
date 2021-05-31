@@ -69,13 +69,11 @@ test("can filter by color", async () => {
   userEvent.click(colorDropownButton);
   userEvent.click(screen.getByRole("option", { name: /black/i }));
   expect(colorDropownButton).toHaveTextContent(/black/i);
-  expect(colorDropownButton).not.toHaveTextContent(/white/i);
 
   // pick white
   userEvent.click(colorDropownButton);
   userEvent.click(screen.getByRole("option", { name: /white/i }));
   expect(colorDropownButton).toHaveTextContent(/white/i);
-  expect(colorDropownButton).not.toHaveTextContent(/black/i);
 
   // click filter
   userEvent.click(screen.getByRole("button", { name: /filter/i }));
@@ -111,13 +109,11 @@ test("can filter by manufacturer", async () => {
   userEvent.click(manufacturerDropownButton);
   userEvent.click(screen.getByRole("option", { name: /bmw/i }));
   expect(manufacturerDropownButton).toHaveTextContent(/bmw/i);
-  expect(manufacturerDropownButton).not.toHaveTextContent(/audi/i);
 
   // pick audi
   userEvent.click(manufacturerDropownButton);
   userEvent.click(screen.getByRole("option", { name: /audi/i }));
   expect(manufacturerDropownButton).toHaveTextContent(/audi/i);
-  expect(manufacturerDropownButton).not.toHaveTextContent(/bmw/i);
 
   // click filter
   userEvent.click(screen.getByRole("button", { name: /filter/i }));

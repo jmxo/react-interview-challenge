@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > li:not(:last-child)": {
         borderBottom: `1px solid ${theme.palette.gray.main}`,
       },
+      "& li": {
+        textTransform: "capitalize",
+      },
     },
   })
 );

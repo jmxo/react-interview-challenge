@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Car } from "../types";
-import CarDetailsSubtitle from "./CarDetailsSubtitle";
+import CarDetailsSummary from "./CarDetailsSummary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,12 +44,7 @@ export default function CarListItem({ car }: Props) {
   const classes = useStyles();
 
   return (
-    <Card
-      className={classes.cardRoot}
-      variant="outlined"
-      square
-      data-testid="car"
-    >
+    <Card className={classes.cardRoot} data-testid="car">
       {/* image */}
       <div
         className={classes.cardMedia}
@@ -71,7 +66,7 @@ export default function CarListItem({ car }: Props) {
         </Typography>
 
         {/* Stock # 61184 - 152.263 KM - Petrol - Yellow */}
-        <CarDetailsSubtitle
+        <CarDetailsSummary
           car={car}
           variant="body2"
           className={classes.subtitle}

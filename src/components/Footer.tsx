@@ -19,7 +19,7 @@ export default function Footer() {
   const classes = useStyles();
   return (
     <footer className={classes.footer}>
-      <Typography variant="body1">© AUTO1 Group 2018</Typography>
+      <Typography>© AUTO1 Group 2018</Typography>
     </footer>
   );
 }

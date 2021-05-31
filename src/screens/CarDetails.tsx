@@ -9,7 +9,7 @@ import { useErrorHandler } from "react-error-boundary";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
-import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
+import CarDetailsSummary from "../components/CarDetailsSummary";
 import useCar from "../hooks/useCar";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -66,7 +66,6 @@ const ContentWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   padding: 8px;
-
   @media (max-width: 960px) {
     flex-direction: column;
     width: 100%;
@@ -138,7 +137,7 @@ export default function CarDetails() {
               <Skeleton />
             </Typography>
           ) : (
-            car && <CarDetailsSubtitle car={car} className={classes.subtitle} />
+            car && <CarDetailsSummary car={car} className={classes.subtitle} />
           )}
 
           {/* Availability */}
@@ -153,7 +152,7 @@ export default function CarDetails() {
 
         <aside className={classes.aside}>
           {status === "success" && (
-            <Card variant="outlined" square className={classes.favCard}>
+            <Card square className={classes.favCard}>
               <Typography>
                 {isFavorite
                   ? `This car is saved in your collection of favourite items.`
@@ -162,12 +161,7 @@ export default function CarDetails() {
               </Typography>
 
               <CardActions className={classes.cardActions}>
-                <Button
-                  onClick={handleClick}
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                >
+                <Button onClick={handleClick} color="primary">
                   {isFavorite ? "Remove" : "Save"}
                 </Button>
               </CardActions>

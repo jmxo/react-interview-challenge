@@ -1,7 +1,7 @@
-import CarDetailsSubtitle from "../components/CarDetailsSubtitle";
+import CarDetailsSummary from "../components/CarDetailsSummary";
 import { render, screen } from "../utils/test-utils";
 
-test("CarDetailsSubtitle", () => {
+test("CarDetailsSummary", () => {
   const car = {
     stockNumber: 51778,
     manufacturerName: "Mercedes-Benz",
@@ -15,7 +15,7 @@ test("CarDetailsSubtitle", () => {
     pictureUrl: "https://auto1-js-task-api--mufasa71.repl.co/images/car.svg",
   };
 
-  render(<CarDetailsSubtitle car={car} />);
+  render(<CarDetailsSummary car={car} />);
 
   expect(
     screen.getByText("Stock #51778 - 199.508 KM - Diesel - yellow")
